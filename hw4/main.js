@@ -133,19 +133,14 @@ console.log(swap(numbers,0,2));
 //- Написати функцію обміну валюти exchange(sumUAH,currencyValues,exchangeCurrency)
 // Приклад exchange(10000,[{currency:'USD',value:40},{currency:'EUR',value:42}],'USD') // => 250
 
-
-function exchange(sumUAH,currencyValues,exchangeCurrency) {
-    let sum = Math.round(sumUAH/currencyValues * 100);
-return sum/100  + " " + exchangeCurrency;
-}
-console.log(exchange(10000,37,"USD"));
-
-function exchange2(sumUAH,exchangeCurrency) {
-    switch (exchangeCurrency){
-        case "USD":
-            return Math.round(sumUAH/40*100)/100 + " " + exchangeCurrency;
-        case "EUR":
-            return Math.round(sumUAH/42*100)/100  + " " + exchangeCurrency;
+currencyData= [{currency:'USD',value:40},{currency:'EUR',value:42}];
+function exchange(sumUAH,arrWithData,exchangeCurrency) {
+    let sum = 0;
+    for (const currDataItem of arrWithData) {
+            if (currDataItem.currency===exchangeCurrency){
+                sum = Math.round(sumUAH/currDataItem.value * 100);
+        }
     }
+    return sum/100  + " " + exchangeCurrency;
 }
-console.log(exchange2(20000,"EUR"))
+console.log(exchange(10000,currencyData,"USD"));
